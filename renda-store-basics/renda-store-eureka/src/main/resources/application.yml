@@ -1,0 +1,21 @@
+server:
+  port: 8888
+
+# 注册名称
+spring:
+  application:
+    name: service-eureka
+
+# eureka 注册服务地址
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    fetch-registry: false
+    register-with-eureka: false
+  # 禁止eureka的自我保护机制，并每隔2秒扫描一次
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 2000

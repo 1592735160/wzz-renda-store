@@ -1,0 +1,48 @@
+server:
+  port: 8003
+
+eureka:
+  client:
+    serviceUrl:
+      # 将当前服务注册到 -- eureka服务地址
+      defaultZone: http://localhost:8888/eureka/
+    # 将服务注册到eureka上
+    register-with-eureka: true
+    # 检索服务
+    fetch-registry: true
+  instance:
+    # Eureka客户端向服务端发送心跳的时间间隔，单位：秒
+    lease-renewal-interval-in-seconds: 1
+    # Eureka服务端收到最后一次心跳之后等待的时间上限，单位：秒，超过则剔除
+    lease-expiration-duration-in-seconds: 2
+
+spring:
+  application:
+    #服务别名---服务注册到注册中心的名称
+    name: common-hystrix,common-feign
+
+  # spring连接数据库驱动
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/student?serverTimezone=UTC&useSSL=false
+    username: root
+    password: kang
+
+  # jpa自动创建不存在的数据表
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      use-new-id-generator-mappings: true
+  jackson:
+    serialization:
+      indent_output: false
+
+  cloud:
+    config:
+      # 环境
+      profile: dev
+      discovery:
+        service-id: config-server
+        # 开启读取权限
+        enabled: true

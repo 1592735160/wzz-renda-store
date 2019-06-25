@@ -1,0 +1,23 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8888/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    lease-renewal-interval-in-seconds: 1
+    lease-expiration-duration-in-seconds: 2
+
+spring:
+  application:
+    #注册到eureka上的服务名称
+    name: gateway
+  cloud:
+    config:
+      ##版本环境
+      profile: dev
+      ##config-server环境,config-server的发布到eureka上的名称
+      discovery:
+        service-id: config-server
+        ##开启读取权限
+        enabled: true
